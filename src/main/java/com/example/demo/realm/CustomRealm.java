@@ -18,7 +18,7 @@ import java.util.Set;
  * @version v1.0.0
  * @className: CustomRealm
  * @author: Mr.Cao
- * @description: TODO
+ * @description: TODO 自定义域
  * @date: 2019/12/17/10:28
  **/
 public class CustomRealm extends AuthorizingRealm {

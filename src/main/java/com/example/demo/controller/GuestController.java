@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -17,6 +18,7 @@ public class GuestController {
         return "游客";
     }
 
+    @RequiresRoles("user")
     @GetMapping(value = "/getMessage")
     public String submitLogin() {
             return "可以获取信息";
