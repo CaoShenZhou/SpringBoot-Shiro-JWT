@@ -33,22 +33,6 @@ public class ShiroConfig {
         return new CustomRealm();
     }
 
-    /**
-     * @author: Mr.Cao
-     * @description: TODO 默认Web安全管理器
-     * @version: v1.0.0
-     * @date 2019/12/17/14:49
-     **/
-    /*
-    @Bean
-    public DefaultWebSecurityManager securityManager() {
-        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        //设置realm
-        securityManager.setRealm(customRealm());
-        return securityManager;
-    }
-     */
-
 
     /**
      * @author: Mr.Cao
@@ -95,12 +79,12 @@ public class ShiroConfig {
     @Bean
     public ShiroFilterFactoryBean factory(SecurityManager securityManager) {
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
-
-        // 添加自己的过滤器并且取名为jwt
         Map<String, Filter> filterMap = new LinkedHashMap<>();
         //设置我们自定义的JWT过滤器
         filterMap.put("jwt", new JwtFilter());
+        //设置过滤器
         factoryBean.setFilters(filterMap);
+        //设置安全管理器
         factoryBean.setSecurityManager(securityManager);
         // 设置无权限时跳转的 url;
         factoryBean.setUnauthorizedUrl("/notRole");
@@ -119,13 +103,9 @@ public class ShiroConfig {
     @Bean
     public DefaultWebSecurityManager defaultWebSecurityManager(CustomRealm customRealm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        // 设置自定义 realm.
+        //设置自定义realm.
         securityManager.setRealm(customRealm());
-
-        /*
-         * 关闭shiro自带的session，详情见文档
-         * http://shiro.apache.org/session-management.html#SessionManagement-StatelessApplications%28Sessionless%29
-         */
+        //关闭shiro自带的session
         DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
         DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
         defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
@@ -134,14 +114,10 @@ public class ShiroConfig {
         return securityManager;
     }
 
-    /**
-     * 添加注解支持
-     */
     @Bean
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
         DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
-        // 强制使用cglib，防止重复代理和可能引起代理出错的问题
-        // https://zhuanlan.zhihu.com/p/29161098
+        //强制使用cglib,防止重复代理和可能引起代理出错的问题
         defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
         return defaultAdvisorAutoProxyCreator;
     }
