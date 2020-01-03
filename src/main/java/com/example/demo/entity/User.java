@@ -7,7 +7,7 @@ import lombok.Data;
  * @className: User
  * @author: Mr.Cao
  * @description: TODO
- * @date: 2019/12/17/10:16
+ * @date: 2020/01/03/下午 05:25
  **/
 @Data
 public class User {
@@ -20,4 +20,6 @@ public class User {
     private String role;
 
     private String permission;
+
+    private Integer ban;
 }

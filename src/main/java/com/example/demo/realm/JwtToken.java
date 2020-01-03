@@ -1,15 +1,18 @@
 package com.example.demo.realm;
 
+import lombok.Data;
 import org.apache.shiro.authc.AuthenticationToken;
 
 /**
  * @version v1.0.0
  * @className: JwtToken
  * @author: Mr.Cao
- * @description: TODO
- * @date: 2019/12/28/15:45
+ * @description: TODO JWT令牌
+ * @date: 2020/01/03/下午 04:56
  **/
+@Data
 public class JwtToken implements AuthenticationToken {
+
     private String token;
 
     public JwtToken(String token) {
@@ -18,11 +21,11 @@ public class JwtToken implements AuthenticationToken {
 
     @Override
     public Object getPrincipal() {
-        return token;
+        return null;
     }
 
     @Override
     public Object getCredentials() {
-        return token;
+        return null;
     }
 }

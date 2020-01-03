@@ -7,10 +7,9 @@ import com.example.demo.entity.User;
  * @className: UserMapper
  * @author: Mr.Cao
  * @description: TODO
- * @date: 2019/12/17/10:21
+ * @date: 2020/01/03/下午 05:32
  **/
 public interface UserMapper {
-
     String getPassword(String username);
 
     String getRole(String username);
