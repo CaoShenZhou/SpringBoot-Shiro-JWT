@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.ResponseResult;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.JwtUtil;
@@ -25,13 +26,15 @@ public class SystemCtrl {
     private UserService userService;
 
     @PostMapping("login")
-    public String login(String username, String password) {
+    public ResponseResult login(String username, String password) {
+        ResponseResult responseResult = new ResponseResult();
         User user = userService.getUser(username);
         if (user.getPassword().equals(password)) {
             String token = JwtUtil.createToken(username);
-            return token;
+            responseResult.success(token);
+            return responseResult;
         } else {
-            return "error";
+            return responseResult;
         }
     }
 
