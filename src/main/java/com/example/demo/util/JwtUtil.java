@@ -3,6 +3,7 @@ package com.example.demo.util;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 
 import java.util.Date;
@@ -11,7 +12,7 @@ import java.util.Date;
  * @version v1.0.0
  * @className: JwtUtil
  * @author: Mr.Cao
- * @description: TODO
+ * @description: TODO Jwt工具
  * @date: 2020/01/03/下午 04:44
  **/
 public class JwtUtil {
@@ -65,7 +66,9 @@ public class JwtUtil {
      **/
     public static String getUsername(String token) {
         try {
-            return JWT.decode(token).getClaim("username").asString();
+            //解码JWT
+            DecodedJWT jwt = JWT.decode(token);
+            return jwt.getClaim("username").asString();
         } catch (JWTDecodeException e) {
             return null;
         }

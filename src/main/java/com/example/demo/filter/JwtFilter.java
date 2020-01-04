@@ -29,7 +29,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
             executeLogin(request, response);
             return true;
         } catch (Exception e) {
-            throw new AuthenticationException("Token失效请重新登录");
+            throw new AuthenticationException("token有误");
         }
     }
 
@@ -43,7 +43,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         //获取token
-        String token = httpServletRequest.getHeader("Authorization");
+        String token = httpServletRequest.getHeader("token");
         JwtToken jwtToken = new JwtToken(token);
         //提交给realm进行登入
         getSubject(request, response).login(jwtToken);

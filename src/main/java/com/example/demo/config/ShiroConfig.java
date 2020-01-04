@@ -4,7 +4,6 @@ import com.example.demo.filter.JwtFilter;
 import com.example.demo.realm.ShiroRealm;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
-import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -47,11 +46,11 @@ public class ShiroConfig {
         //设置登录url
         shiroFilterFactoryBean.setUnauthorizedUrl("/sys/unauthorized");
         //设置未授权url
-        shiroFilterFactoryBean.setLoginUrl("/sys/notLogin");
+        shiroFilterFactoryBean.setLoginUrl("/system/notLogin");
         //设置自定义拦截器
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/sys/login", "anon");
-        filterChainDefinitionMap.put("/sys/logout", "anon");
+        filterChainDefinitionMap.put("/system/login", "anon");
+        filterChainDefinitionMap.put("/system/logout", "anon");
         filterChainDefinitionMap.put("/**", "jwt");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
@@ -62,6 +61,7 @@ public class ShiroConfig {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         //设置自定义realm
         securityManager.setRealm(shiroRealm());
+        //关闭shiro自带的session
         DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
         DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
         defaultSessionStorageEvaluator.setSessionStorageEnabled(false);

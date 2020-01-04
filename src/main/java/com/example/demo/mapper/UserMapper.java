@@ -10,9 +10,5 @@ import com.example.demo.entity.User;
  * @date: 2020/01/03/下午 05:32
  **/
 public interface UserMapper {
-    String getPassword(String username);
-
-    String getRole(String username);
-
     User getUser(String username);
 }

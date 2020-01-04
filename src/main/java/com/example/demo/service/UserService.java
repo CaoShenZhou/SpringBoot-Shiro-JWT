@@ -14,17 +14,8 @@ import org.springframework.stereotype.Service;
  **/
 @Service
 public class UserService {
-
     @Autowired
     private UserMapper userMapper;
-
-    public String getPassword(String username) {
-        return userMapper.getPassword(username);
-    }
-
-    public String getRole(String username) {
-        return userMapper.getRole(username);
-    }
 
     public User getUser(String username) {
         return userMapper.getUser(username);
